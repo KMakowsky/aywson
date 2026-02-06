@@ -36,7 +36,7 @@
   ],
   "scripts": {
     "test": "vitest",
-    "build": "tsdown --outDir dist src/index.ts src/cli.ts --format esm,cjs --dts --sourcemap",
+    "build": "tsdown --unbundle --outDir dist src/index.ts src/cli.ts --format esm,cjs --dts --sourcemap",
     "check": "biome check && tsc --noEmit"
   },
   "keywords": [
