@@ -841,6 +841,18 @@ describe("replace", () => {
     expect(result).toBe('{ "baz": 456 }');
   });
 
+  it("should replace fields with empty objects", () => {
+    const json = '{ "foo": "bar", "baz": 1 }';
+    const result = replace(json, { foo: "bar", baz: {} });
+    expect(result).toBe('{ "foo": "bar", "baz": {} }');
+  });
+
+  it("should add fields with empty objects", () => {
+    const json = '{ "foo": "bar" }';
+    const result = replace(json, { foo: "bar", baz: {} });
+    expect(result).toBe('{ "foo": "bar","baz": {} }');
+  });
+
   it("should work like modify", () => {
     const json = '{ "a": 1, "b": 2, "c": 3 }';
     expect(replace(json, { a: 10, b: 20 })).toBe(

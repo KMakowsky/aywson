@@ -360,6 +360,10 @@ function flattenChanges(
     }
   }
 
+  if (result.length === 0) {
+    result.push({ path: [...prefix], value: {} });
+  }
+
   return result;
 }
 
