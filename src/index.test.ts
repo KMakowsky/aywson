@@ -815,6 +815,18 @@ describe("merge", () => {
     expect(result).toBe('{ "foo": "updated", "baz": 123 }');
   });
 
+  it("should update values with empty objects", () => {
+    const json = '{ "foo": "bar", "baz": 123 }';
+    const result = merge(json, { foo: {} });
+    expect(result).toBe('{ "foo": {}, "baz": 123 }');
+  });
+
+  it("should update values with objects only containing undefined keys", () => {
+    const json = '{ "foo": "bar", "baz": 123 }';
+    const result = merge(json, { foo: { key: undefined } });
+    expect(result).toBe('{ "foo": {}, "baz": 123 }');
+  });
+
   it("should add new keys", () => {
     const json = '{ "foo": "bar" }';
     const result = merge(json, { baz: 123 });
@@ -844,6 +856,12 @@ describe("replace", () => {
   it("should replace fields with empty objects", () => {
     const json = '{ "foo": "bar", "baz": 1 }';
     const result = replace(json, { foo: "bar", baz: {} });
+    expect(result).toBe('{ "foo": "bar", "baz": {} }');
+  });
+
+  it("should replace fields with objects containing only undefined keys", () => {
+    const json = '{ "foo": "bar", "baz": 1 }';
+    const result = replace(json, { foo: "bar", baz: { key: undefined } });
     expect(result).toBe('{ "foo": "bar", "baz": {} }');
   });
 
